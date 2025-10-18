@@ -665,11 +665,21 @@
   © 2025 Rexora Reve. Built & Managed by <strong>Ritik Raj</strong> — Founder of Rexora Reve.
 </footer>
 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const io = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('inview');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         
-        // The IntersectionObserver code has been removed.
-        
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
         const menuToggle = document.querySelector('.menu-toggle');
         const navInner = document.querySelector('.nav-inner');
         
@@ -696,3 +706,9 @@
         }, LOADING_DURATION);
     });
 </script>
+
+
+</body>
+</html>
+
+  
