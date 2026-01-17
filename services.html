@@ -1,7 +1,7 @@
 <!doctype html>
-
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPMYFZVV2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -9,12 +9,12 @@
       gtag('js', new Date());
       gtag('config', 'G-CYPMYFZVV2');
     </script>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Rexora Reve — Our Services</title>
-    <meta name="description" content="Explore premium digital marketing services from Rexora Reve.">
+    <meta name="description" content="Explore premium digital marketing services from Rexora Reve. SEO, Social Media, and more.">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
 
 <style>
     :root {
@@ -26,6 +26,7 @@
         --accent: #4A90E2;
         --glass-dark: rgba(0, 0, 0, 0.6);
         --glass-light: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
         --radius: 20px;
         --max-width: 1200px;
         --font-sans: 'Montserrat', system-ui, sans-serif;
@@ -44,45 +45,128 @@
         color: var(--silver);
         overflow-x: hidden;
         scroll-behavior: smooth;
+        perspective: 1000px;
     }
 
     .container {
         max-width: var(--max-width);
         margin: 0 auto;
         padding: 0 20px;
+        position: relative;
+        z-index: 10;
     }
 
     .section {
         padding: 100px 0;
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         position: relative;
     }
 
+    /* ============================================
+       3D SCROLL & MOVING BACKGROUND
+       ============================================ */
+    
+    .liquid-bg {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1; pointer-events: none; overflow: hidden;
+        background: radial-gradient(ellipse at 50% 50%, rgba(20, 20, 20, 1) 0%, transparent 80%);
+    }
+
+    .silver-sphere {
+        position: absolute; border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, 
+            rgba(255, 255, 255, 0.9) 0%, 
+            rgba(200, 200, 200, 0.6) 20%, 
+            rgba(150, 150, 150, 0.4) 40%, 
+            rgba(100, 100, 100, 0.2) 60%, 
+            rgba(50, 50, 50, 0.1) 70%, 
+            transparent 100%);
+        box-shadow: 
+            0 0 60px rgba(192, 192, 192, 0.15),
+            inset -5px -5px 20px rgba(0,0,0,0.3);
+        transition: transform 0.1s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+        will-change: transform;
+    }
+
+    .sphere-1 { width: 300px; height: 300px; top: 10%; left: -10%; opacity: 0.3; }
+    .sphere-2 { width: 200px; height: 200px; top: 70%; right: -5%; opacity: 0.2; }
+    .sphere-3 { width: 150px; height: 150px; top: 40%; left: 80%; opacity: 0.15; }
+
+    .liquid-blob {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+        filter: blur(30px);
+        opacity: 0.3;
+        transition: transform 0.2s ease-out;
+        animation: floatBlob linear infinite;
+    }
+
+    .blob-1 { width: 400px; height: 400px; top: 20%; left: 20%; animation-duration: 25s; }
+    .blob-2 { width: 300px; height: 300px; top: 60%; right: 10%; animation-duration: 20s; }
+
+    @keyframes floatBlob {
+        0% { transform: translateY(0px) translateX(0); }
+        33% { transform: translateY(-30px) translateX(20px); }
+        66% { transform: translateY(20px) translateX(-20px); }
+        100% { transform: translateY(0px) translateX(0); }
+    }
+
+    .particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1; pointer-events: none; overflow: hidden;
+    }
+
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+        0% { transform: translateY(110vh) scale(0); opacity: 0; }
+        10% { opacity: 0.8; }
+        90% { opacity: 0.8; }
+        100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ============================================
+       UI STYLES
+       ============================================ */
+
     .glass-card {
         background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid var(--glass-border);
         border-radius: var(--radius);
         box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.8),
+            0 8px 32px rgba(0, 0, 0, 0.5),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
         padding: 30px;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        min-height: 500px;
+        transition: 
+            transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            box-shadow 0.4s ease,
+            border-color 0.4s ease;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         text-align: left;
+        transform-style: preserve-3d;
     }
 
+    /* ✨ NEW HOVER: Smooth lift + glow (no scale) */
     .glass-card:hover {
-        transform: translateY(-12px);
+        transform: translateY(-8px);
         box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.9),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            0 0 40px rgba(192, 192, 192, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
+            0 20px 50px rgba(0, 0, 0, 0.6),
+            0 0 0 2px rgba(74, 144, 226, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.25);
     }
 
     .header {
@@ -90,9 +174,10 @@
         top: 0;
         z-index: 100;
         padding: 20px 0;
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
     }
 
     .nav-inner {
@@ -104,10 +189,12 @@
     .brand {
         font-size: 22px;
         font-weight: 700;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         background: linear-gradient(135deg, #FFFFFF, #C0C0C0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
     }
 
     .nav-actions {
@@ -136,58 +223,49 @@
         transition: width 0.3s;
     }
 
-    .nav-actions a:hover {
-        color: var(--platinum);
-    }
-
-    .nav-actions a:hover::after {
-        width: 100%;
-    }
-
-    .nav-actions a.active {
-        color: var(--platinum);
-    }
+    .nav-actions a:hover { color: var(--platinum); text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+    .nav-actions a:hover::after { width: 100%; }
+    .nav-actions a.active { color: var(--accent); text-shadow: 0 0 15px rgba(74, 144, 226, 0.4); }
 
     .chrome-ray {
-        position: absolute;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(180deg, transparent, rgba(192, 192, 192, 0.1), transparent);
-        animation: shimmer 8s infinite linear;
+        position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh;
+        background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.05), transparent);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.3;
     }
-
-    @keyframes shimmer {
-        0%, 100% { opacity: 0.1; }
-        50% { opacity: 0.3; }
-    }
-
-    .chrome-ray:nth-child(1) { left: 15%; animation-delay: 0s; }
-    .chrome-ray:nth-child(2) { left: 40%; animation-delay: 3s; }
-    .chrome-ray:nth-child(3) { right: 15%; animation-delay: 6s; }
 
     .services-content {
         text-align: center;
+        margin-bottom: 60px;
+        position: relative;
     }
 
     .services-content h2 {
-        font-size: 64px;
-        font-weight: 700;
-        margin-bottom: 30px;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        margin-bottom: 20px;
         background: linear-gradient(135deg, #FFFFFF, #C0C0C0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        letter-spacing: -2px;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
     }
 
     .services-content p {
         font-size: 18px;
-        color: var(--chrome);
-        margin-bottom: 60px;
+        color: var(--silver);
+        margin-bottom: 0;
         font-weight: 300;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .pricing-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 24px;
         margin-top: 40px;
     }
@@ -197,12 +275,15 @@
         color: var(--platinum);
         margin-bottom: 20px;
         font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
     .package-card .price {
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 700;
-        margin: 15px 0 25px;
+        margin: 10px 0 25px;
         background: linear-gradient(135deg, #FFFFFF, #C0C0C0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -212,80 +293,113 @@
         list-style: none;
         padding: 0;
         margin-bottom: 25px;
+        flex-grow: 1;
     }
 
     .package-card ul li {
-        padding: 12px 0;
-        color: var(--chrome);
+        padding: 10px 0;
+        color: rgba(255, 255, 255, 0.8);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         font-weight: 300;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
     }
 
-    .cta-btn {
+    .package-card ul li::before {
+        content: '•';
+        color: var(--accent);
+        margin-right: 10px;
+        font-size: 1.2rem;
+        line-height: 0;
+    }
+
+    .glass-btn {
         display: inline-block;
-        padding: 18px 40px;
+        padding: 14px 35px;
         border-radius: 50px;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
         text-decoration: none;
-        border: none;
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         position: relative;
         overflow: hidden;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+    }
+
+    .glass-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: all 0.4s;
+        transform: translateX(-100%);
+    }
+
+    .glass-btn:hover {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+        transform: translateY(-3px);
+        box-shadow: 
+            0 10px 40px rgba(74, 144, 226, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-btn:hover::before {
+        transform: translateX(100%);
+    }
+
+    .footer-cta {
+        margin-top: 60px;
+        text-align: center;
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer-cta::before {
+        content: '';
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        pointer-events: none;
+    }
+
+    .footer-cta h3 {
+        color: var(--platinum);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
         letter-spacing: 1px;
     }
 
-    .cta-btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+    .footer-cta p {
+        color: var(--chrome);
+        margin-bottom: 30px;
+        font-size: 1rem;
     }
 
-    .cta-btn:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-
-    .cta-btn.primary {
-        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    }
-
-    .cta-btn.primary:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 48px rgba(192, 192, 192, 0.2);
-        border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .cta-btn.secondary {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: var(--silver);
-    }
-
-    .cta-btn.secondary:hover {
-        background: rgba(255, 255, 255, 0.05);
-        transform: translateY(-4px);
+    .footer-main {
+        display: inline-block;
+        width: auto;
+        padding: 14px 35px;
     }
 
     .footer {
-        padding: 40px 0;
+        padding: 30px 0;
         text-align: center;
         color: var(--chrome);
         font-size: 14px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         font-weight: 300;
         letter-spacing: 1px;
-        margin-top: 60px;
+        margin-top: auto;
     }
 
     .menu-toggle {
@@ -295,6 +409,7 @@
         cursor: pointer;
         padding: 10px;
         z-index: 101;
+        color: #fff;
     }
 
     .menu-toggle .bar {
@@ -307,56 +422,76 @@
         border-radius: 2px;
     }
 
-    @media (max-width: 1200px) {
-        .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-        .brand { display: none; }
-    }
-
-    @media (max-width: 900px) {
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
         .pricing-grid { grid-template-columns: 1fr; }
-        .services-content h2 { font-size: 48px; }
-    }
-
-    @media (max-width: 500px) {
-        .services-content h2 { font-size: 36px; }
+        .brand { font-size: 18px; }
+        .sphere-1 { display: none; } 
+        .glass-card { padding: 25px; }
         .menu-toggle { display: block; }
         .nav-actions {
             position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(30px);
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transform: translateX(100%);
             transition: transform 0.4s ease-in-out;
             z-index: 99;
+            padding-top: 60px;
         }
-        .nav-inner.menu-open .nav-actions {
-            transform: translateX(0);
+        .nav-actions.menu-open { transform: translateX(0); }
+        .nav-actions a { font-size: 24px; padding: 20px 0; width: 100%; text-align: center; }
+        .container { padding: 0 15px; }
+    }
+
+    /* ✅ Tablet Optimization */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .pricing-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
         }
-        .nav-actions a {
+        .glass-card {
+            padding: 25px 20px;
+        }
+        .package-card h3 {
+            font-size: 22px;
+        }
+        .package-card .price {
             font-size: 28px;
-            padding: 20px 0;
         }
     }
 </style>
-```
-
 </head>
 
 <body>
+    
+    <div class="liquid-bg">
+        <div class="silver-sphere sphere-1" data-speed="0.02"></div>
+        <div class="silver-sphere sphere-2" data-speed="0.05"></div>
+        <div class="silver-sphere sphere-3" data-speed="0.03"></div>
+        <div class="liquid-blob blob-1" data-speed="0.01"></div>
+        <div class="liquid-blob blob-2" data-speed="0.02"></div>
+        <div class="chrome-ray"></div>
+    </div>
+
+    <div class="particles-container" id="particles"></div>
+
     <header class="header">
         <div class="container nav-inner">
-            <img src="assets/logo.png" alt="REXORA REVE" width="50" height="50" style="border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);">
-            <div class="brand">REXORA REVE</div>
+            <!-- ✅ LOGO ADDED -->
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="assets/logo.png" alt="Rexora Reve Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+            </a>
+            
             <button class="menu-toggle" aria-label="Toggle menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
+            
             <nav class="nav-actions">
                 <a href="index.html">HOME</a>
                 <a href="services.html" class="active">SERVICES</a>
@@ -365,91 +500,169 @@
         </div>
     </header>
 
-
-<section class="section" id="services">
-    <div class="chrome-ray"></div>
-    <div class="chrome-ray"></div>
-    <div class="chrome-ray"></div>
-    
-    <div class="container services-content">
-        <h2>Our Services</h2>
-        <p>Premium digital solutions crafted for your success</p>
+    <section class="section">
+        <div class="chrome-ray"></div>
         
-        <div class="pricing-grid">
-            <div class="glass-card package-card">
-                <div>
-                    <h3>⭐ Basic Package</h3>
-                    <div class="price">₹1,999 /mo</div>
-                    <ul>
-                        <li>4 Social Media Posts / month</li>
-                        <li>1 Promotional Video</li>
-                        <li>Account Setup & Branding</li>
-                    </ul>
+        <div class="container services-content">
+            <h2>Our Services</h2>
+            <p>Premium digital solutions crafted for your success</p>
+            
+            <div class="pricing-grid">
+                <div class="glass-card package-card">
+                    <div>
+                        <h3>Basic Growth</h3>
+                        <div class="price">₹1,999/mo</div>
+                        <ul>
+                            <li>4 Social Posts</li>
+                            <li>Community Management</li>
+                            <li>Basic Analytics</li>
+                            <li>Monthly Reporting</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="glass-btn">START BASIC</a>
                 </div>
-                <a href="contact.html" class="cta-btn primary">START BASIC</a>
+
+                <div class="glass-card package-card">
+                    <div>
+                        <h3>Scale Up</h3>
+                        <div class="price">₹3,999/mo</div>
+                        <ul>
+                            <li>8 Social Posts</li>
+                            <li>Content Strategy</li>
+                            <li>Hashtag Research</li>
+                            <li>2 Reels / Shorts</li>
+                            <li>Monthly Growth Report</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html"  class="glass-btn">GO STANDARD</a>
+                </div>
+
+                <div class="glass-card package-card">
+                    <div>
+                        <h3>Dominate</h3>
+                        <div class="price">₹5,999/mo</div>
+                        <ul>
+                            <li>12 Social Posts</li>
+                            <li>4 Promotional Videos / Shorts</li>
+                            <li>YouTube Channel Management</li>
+                            <li>SEO + Strategy Support</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="glass-btn">UNLOCK PREMIUM</a>
+                </div>
+
+                <div class="glass-card package-card">
+                    <div>
+                        <h3>Enterprise</h3>
+                        <div class="price">Quote</div>
+                        <ul>
+                            <li>Full Website Development</li>
+                            <li>Large-Scale Campaign</li>
+                            <li>Dedicated Management</li>
+                            <li>Advanced Analytics</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html"  class="glass-btn">GET A QUOTE</a>
+                </div>
             </div>
 
-            <div class="glass-card package-card">
-                <div>
-                    <h3>🚀 Standard Package</h3>
-                    <div class="price">₹3,999 /mo</div>
-                    <ul>
-                        <li>8 Social Media Posts / month</li>
-                        <li>2 Promotional Videos</li>
-                        <li>Account Optimization (Insta/Facebook)</li>
-                        <li>Monthly Growth Report</li>
-                    </ul>
-                </div>
-                <a href="contact.html" class="cta-btn primary">GO STANDARD</a>
-            </div>
-
-            <div class="glass-card package-card">
-                <div>
-                    <h3>🔥 Premium Package</h3>
-                    <div class="price">₹5,999 /mo</div>
-                    <ul>
-                        <li>12 Social Media Posts / month</li>
-                        <li>4 Promotional Videos / Shorts</li>
-                        <li>YouTube Channel Management</li>
-                        <li>SEO + Strategy Support</li>
-                    </ul>
-                </div>
-                <a href="contact.html" class="cta-btn primary">UNLOCK PREMIUM</a>
-            </div>
-
-            <div class="glass-card package-card">
-                <div>
-                    <h3>💎 Custom Projects</h3>
-                    <div class="price">Quote Based</div>
-                    <ul>
-                        <li>Full Website Development</li>
-                        <li>Large-Scale Campaign</li>
-                        <li>Dedicated Management</li>
-                        <li>Advanced Analytics</li>
-                    </ul>
-                </div>
-                <a href="contact.html" class="cta-btn secondary">GET A QUOTE</a>
+            <div class="footer-cta">
+                <h3>Own a Business?</h3>
+                <p>Stop dreaming and start doing. Unlock the full potential of your brand with our premium digital packages tailored for exponential growth.</p>
+                
+                <!-- ✅ FIXED LINK (no extra spaces) -->
+                <a href="https://rexora-reve-package.netlify.app"  class="glass-btn footer-main">
+                    VIEW PACKAGES
+                    <svg style="width: 16px; height: 16px; margin-left: 8px; fill: none; stroke: currentColor; stroke-width: 2.5;" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer class="footer">
-    © 2025 Rexora Reve. All rights reserved.
-</footer>
+    <footer class="footer">
+        © 2025 Rexora Reve. All rights reserved. | Designed for Excellence.
+    </footer>
 
-<script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navInner = document.querySelector('.nav-inner');
-    
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navInner.classList.toggle('menu-open');
-            menuToggle.classList.toggle('is-active');
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 3 + 1;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 25 + 10;
+                const delay = Math.random() * 20;
+                
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${left}%;
+                    top: ${Math.random() * 100}%;
+                    animation-duration: ${duration}s;
+                    animation-delay: -${delay}s;
+                    opacity: ${Math.random() * 0.4 + 0.2};
+                `;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        const spheres = document.querySelectorAll('.silver-sphere');
+        const blobs = document.querySelectorAll('.liquid-blob');
+        let scrollY = 0;
+        let ticking = false;
+
+        function updateBackgroundElements() {
+            const scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
+            
+            spheres.forEach((sphere, index) => {
+                const speed = parseFloat(sphere.dataset.speed) || 0.02;
+                const yOffset = (scrollPercent * 400) * -1;
+                const xOffset = Math.sin(scrollPercent * Math.PI * 2 + index) * 20;
+                const scale = 1 + Math.sin(scrollPercent * 2 + index) * 0.1;
+                
+                sphere.style.transform = `translateY(${yOffset}px) translateX(${xOffset}px) scale(${scale})`;
+            });
+
+            blobs.forEach((blob, index) => {
+                const speed = parseFloat(blob.dataset.speed) || 0.01;
+                const yOffset = (scrollPercent * 600) * -1;
+                const skewX = Math.sin(scrollPercent * 5 + index) * 5;
+                const rotate = scrollPercent * 10 * index;
+                
+                blob.style.transform = `translateY(${yOffset}px) skewX(${skewX}deg) rotate(${rotate}deg)`;
+            });
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            if (!ticking) {
+                requestAnimationFrame(updateBackgroundElements);
+                ticking = true;
+            }
         });
-    }
-</script>
 
+        updateBackgroundElements();
 
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navActions = document.querySelector('.nav-actions');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navActions.classList.toggle('menu-open');
+                menuToggle.classList.toggle('is-active');
+            });
+        }
+    </script>
 </body>
 </html>
