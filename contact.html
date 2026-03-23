@@ -3,43 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <style>
-        /* Other styles remain unchanged */
-        .nav-actions { /* Updated styling for nav actions */ }
-        .backdrop { /* Style for backdrop blur effect */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            display: none;
-        }
-    </style>
+    <meta name="description" content="Contact Page of Rexora Official">
+    <meta name="keywords" content="Contact, Rexora, Support">
+    <title>Contact Us | Rexora</title>
+    <link rel="icon" href="/path/to/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="hamburger-menu">
-        <div class="nav-actions" id="nav-toggle">Menu</div>
-        <div class="backdrop" id="backdrop"></div>
-    </div>
-    <script>
-        const navToggle = document.getElementById('nav-toggle');
-        const backdrop = document.getElementById('backdrop');
-        let menuOpen = false;
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        navToggle.addEventListener('click', () => {
-            menuOpen = !menuOpen;
-            backdrop.style.display = menuOpen ? 'block' : 'none';
-            document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
-        });
+    <main>
+        <h1>Contact Us</h1>
+        <p>For inquiries, please email us at: <a href="mailto:info@rexora.com">info@rexora.com</a></p>
+        <section>
+            <h2>Follow Us</h2>
+            <ul>
+                <li><a href="https://www.facebook.com/rexora">Facebook</a></li>
+                <li><a href="https://www.twitter.com/rexora">Twitter</a></li>
+                <li><a href="https://www.instagram.com/rexora">Instagram</a></li>
+            </ul>
+        </section>
+    </main>
 
-        backdrop.addEventListener('click', () => {
-            menuOpen = false;
-            backdrop.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-    </script>
+    <footer>
+        <p>&copy; 2026 Rexora Official. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
